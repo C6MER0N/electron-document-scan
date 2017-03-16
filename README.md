@@ -19,3 +19,5 @@ The sample demonstrates how to create a desktop document scanning app with [Elec
     ![electron document scanner](http://www.codepool.biz/wp-content/uploads/2017/03/electron-dwt.PNG)
 
 
+## Blog
+[Cross-platform Document Scan Application with Electron](http://www.codepool.biz/crossplatform-document-scan-electron.html)
