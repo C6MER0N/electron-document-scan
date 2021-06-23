@@ -27,7 +27,7 @@ The sample demonstrates how to create a desktop document scanning app with [Elec
     electron .
     ```
 
-    ![electron document scanner](http://www.codepool.biz/wp-content/uploads/2017/03/electron-dwt.PNG)
+    ![electron document scanner](https://www.dynamsoft.com/codepool/img/2021/06/electron-document-scanner.png)
 
 
 ## Blog
