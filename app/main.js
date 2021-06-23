@@ -8,7 +8,7 @@ let mainWindow;
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({ width: 480, height: 640, resizable: false });
+    mainWindow = new BrowserWindow({ width: 1024, height: 1024, resizable: true });
 
     // and load the index.html of the app.
     mainWindow.loadURL('file://' + __dirname + '/index.htm');
@@ -45,3 +45,5 @@ app.on('activate', function() {
         createWindow();
     }
 });
+
+// browserWindow.loadURL('https://unpkg.com/dwt/dist/dynamsoft.webtwain.min.js')

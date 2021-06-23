@@ -1,10 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Document Scanner</title>
-    <script type="text/javascript" src="http://www.dynamsoft.com/library/dwt/dynamsoft.webtwain.min.js"></script>
+    <script type="text/javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
+    <script type="text/javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
     <style>
         h1 {
             font-size: 2em;
@@ -12,7 +14,7 @@
             color: #777777;
             text-align: center
         }
-        
+
         table {
             margin: auto;
         }
@@ -23,67 +25,61 @@
     <h1>
         Document Scanner
     </h1>
-    We are using node
-    <script>
-        document.write(process.versions.node)
-    </script>, Chrome
-    <script>
-        document.write(process.versions.chrome)
-    </script>, and Electron
-    <script>
-        document.write(process.versions.electron)
-    </script>.
     <table>
         <tr>
             <td>
                 <!-- dwtcontrolContainer is the default div id for Dynamic Web TWAIN control.
                    If you need to rename the id, you should also change the id in dynamsoft.webtwain.config.js accordingly. -->
-                <div id="dwtcontrolContainer"></div>
-            </td>
-        </tr>
+                   <select size="1" id="source" style="position: relative; width: 220px;"></select>
+                   <div id="dwtcontrolContainer"></div>
+    </td>
+    </tr>
 
-        <tr>
-            <td>
-                <input type="button" value="Scan" onclick="scanImage();" />
-                <input type="button" value="Load" onclick="loadImage();" />
-                <input type="button" value="Save" onclick="saveImage();" />
-            </td>
-        </tr>
+    <tr>
+        <td>
+            <input type="button" value="Scan" onclick="scanImage();" />
+            <input type="button" value="Load" onclick="loadImage();" />
+            <input type="button" value="Save" onclick="saveImage();" />
+        </td>
+    </tr>
     </table>
 
     <script type="text/javascript">
         var console = window['console'] ? window['console'] : {
-            'log': function() {}
+            'log': function () { }
         };
-        Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
+        window.onload = function () {
+            Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady); // Register OnWebTwainReady event. This event fires as soon as Dynamic Web TWAIN is initialized and ready to be used
+        };
+        Dynamsoft.DWT.ProductKey = 't00996QAAAFOf0Y+yrXQaZQZizgHWjLWhKLIixbC+XIiouFQNmdxFtYfO93OOdb5JbO/hRcJRIo8iLpNuCGruMCfk/LbE5MRB+a74hcaluaJGMTpnU8OUYTyFyUo34ttmWR9mJS62';
 
         var DWObject;
 
         function Dynamsoft_OnReady() {
-            DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+            DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer'); // Get the Dynamic Web TWAIN object that is embeded in the div with id 'dwtcontrolContainer'
+            DWObject.Width = 640;
+            DWObject.Height = 640;
             if (DWObject) {
-                DWObject.RegisterEvent('OnPostAllTransfers', SaveWithFileDialog);
+                var count = DWObject.SourceCount;
+                for (var i = 0; i < count; i++)
+                    document.getElementById("source").options.add(new Option(DWObject.GetSourceNameItems(i), i));
             }
         }
 
         function scanImage() {
             if (DWObject) {
-                var bSelected = DWObject.SelectSource();
+                var OnAcquireImageSuccess, OnAcquireImageFailure;
+                OnAcquireImageSuccess = OnAcquireImageFailure = function () {
+                    DWObject.CloseSource();
+                };
 
-                if (bSelected) {
-                    var OnAcquireImageSuccess, OnAcquireImageFailure;
-                    OnAcquireImageSuccess = OnAcquireImageFailure = function() {
-                        DWObject.CloseSource();
-                    };
-
-                    DWObject.OpenSource();
-                    DWObject.IfDisableSourceAfterAcquire = true; // Scanner source will be disabled/closed automatically after the scan. 
-                    DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
-                }
+                DWObject.SelectSourceByIndex(document.getElementById("source").selectedIndex); //Use method SelectSourceByIndex to avoid the 'Select Source' dialog
+                DWObject.OpenSource();
+                DWObject.IfDisableSourceAfterAcquire = true;	// Scanner source will be disabled/closed automatically after the scan.
+                DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
             }
         }
 
-        //Callback functions for async APIs
         function OnSuccess() {
             console.log('successful');
         }
@@ -95,7 +91,7 @@
         function loadImage() {
             if (DWObject) {
                 DWObject.IfShowFileDialog = true; // Open the system's file dialog to load image
-                DWObject.LoadImageEx("", EnumDWT_ImageType.IT_ALL, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation
+                DWObject.LoadImageEx("", Dynamsoft.DWT.EnumDWT_ImageType.IT_ALL, OnSuccess, OnFailure); // Load images in all supported formats (.bmp, .jpg, .tif, .png, .pdf). OnSuccess or OnFailure will be called after the operation
             }
         }
 
@@ -111,6 +107,6 @@
             }
         }
     </script>
-</body>
+    </body>
 
 </html>
