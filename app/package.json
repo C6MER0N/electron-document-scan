@@ -14,10 +14,12 @@
         "Dynamsoft",
         "document scan",
         "web twain",
-        "SDK"
+        "SDK",
+        "document scanning",
+        "document management"
     ],
     "author": "yushulx",
-    "homepage": "http://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx",
+    "homepage": "https://www.dynamsoft.com/web-twain/overview/",
     "devDependencies": {
         "electron-prebuilt": "^1.6.1"
     }
