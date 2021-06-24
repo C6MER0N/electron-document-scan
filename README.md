@@ -6,6 +6,13 @@ The sample demonstrates how to create a desktop document scanning app with [Elec
 1. Download [Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/downloads).
 2. Copy the `Resources` folder from `Dynamic Web TWAIN SDK <version number>\Resources` to your Electron project directory.
 
+## A Basic Electron Application
+Referring to [https://github.com/electron/electron-quick-start](https://github.com/electron/electron-quick-start), a basic Electron application needs just these files:
+
+- package.json - Points to the app's main file and lists its details and dependencies.
+- main.js - Starts the app and creates a browser window to render HTML. This is the app's main process.
+- index.html - A web page to render. This is the app's renderer process.
+
 ## How to Run the Project
 
 1. Install **Electron**:
