@@ -25,6 +25,8 @@ The sample demonstrates how to create a desktop document scanning app with [Elec
     ```
     cd app
     electron .
+    # Or 
+    # npx electron .
     ```
 
     ![electron document scanner](https://www.dynamsoft.com/codepool/img/2021/06/electron-document-scanner.png)
