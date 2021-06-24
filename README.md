@@ -13,7 +13,7 @@ The sample demonstrates how to create a desktop document scanning app with [Elec
     ```bash
     npm install -g electron
     ```
-2. Cop `Resources` folder to `app` folder.
+2. Copy `Resources` folder to `app` folder.
 2. Get a [30-day FREE trial license](https://www.dynamsoft.com/customer/license/trialLicense) and update the following line in `Resources/dynamsoft.webtwain.config.js`:
 
     ```js
