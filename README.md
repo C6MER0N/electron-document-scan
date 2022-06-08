@@ -1,6 +1,6 @@
-# Cross-platform Desktop Document Scanner 
-
-The sample demonstrates how to create a desktop document scanning app with [Electron](http://electron.atom.io/docs/latest/tutorial/quick-start) and [Dynamic Web TWAIN SDK](https://www.dynamsoft.com/web-twain/overview/) for **Windows, Linux and macOS**.
+# Cross-platform Desktop Document Fax/Scanner soultion
+ 
+The sample demonstrates how to create a desktop document fax/scanning app with [Electron](http://electron.atom.io/docs/latest/tutorial/quick-start) and [Dynamic Web TWAIN SDK](https://www.dynamsoft.com/web-twain/overview/) for **Windows, Linux and macOS**.
 
 ## Requirements
 1. Download [Dynamic Web TWAIN](https://www.dynamsoft.com/web-twain/downloads).
